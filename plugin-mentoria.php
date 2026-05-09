@@ -3,7 +3,7 @@
  * Plugin Name: Romulo - Plugin Pag Mentoria
  * Plugin URI: https://aalves.dev
  * Description: Plugin para exibição de timeline interativa com vídeos do YouTube. Feito por <a href="https://aalves.dev" target="_blank">aalves.dev</a>.
- * Version: 1.0.6
+ * Version: 1.0.7
  * Author: aalves.dev
  * Author URI: https://aalves.dev
  * Text Domain: plugin-mentoria
@@ -26,7 +26,7 @@ require_once PLUGIN_MENTORIA_PATH . 'inc/access-control.php';
 add_action('wp_enqueue_scripts', 'plugin_mentoria_enqueue_assets');
 function plugin_mentoria_enqueue_assets() {
     wp_enqueue_style('plugin-mentoria-style', PLUGIN_MENTORIA_URL . 'assets/css/style.css', array(), '1.0.0');
-    wp_enqueue_script('plugin-mentoria-script', PLUGIN_MENTORIA_URL . 'assets/js/script.js', array('jquery'), '1.0.6', true);
+    wp_enqueue_script('plugin-mentoria-script', PLUGIN_MENTORIA_URL . 'assets/js/script.js', array('jquery'), '1.0.7', true);
 
     wp_localize_script('plugin-mentoria-script', 'pluginMentoria', array(
         'ajax_url' => admin_url('admin-ajax.php'),

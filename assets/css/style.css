@@ -146,6 +146,28 @@
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 1;
+}
+
+.video-protection-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* Protege a área do título */
+    z-index: 10;
+    background: transparent;
+}
+
+.video-wrapper:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    background: transparent;
 }
 
 /* Edit Button */

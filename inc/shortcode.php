@@ -30,7 +30,8 @@ function plugin_mentoria_shortcode($atts) {
                             <div class="timeline-video">
                                 <?php if ($youtube_id) : ?>
                                     <div class="video-wrapper">
-                                        <iframe src="https://www.youtube.com/embed/<?php echo $youtube_id; ?>" frameborder="0" allowfullscreen></iframe>
+                                        <div class="video-protection-layer"></div>
+                                        <iframe src="https://www.youtube.com/embed/<?php echo $youtube_id; ?>?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0" frameborder="0" allowfullscreen></iframe>
                                     </div>
                                 <?php else : ?>
                                     <div class="video-placeholder">Vídeo indisponível</div>
