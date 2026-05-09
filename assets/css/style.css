@@ -192,7 +192,7 @@
 .mentoria-popup-content {
     background: var(--mentoria-card-bg);
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px !important;
     height: 80vh;
     border-radius: 20px;
     border: 1px solid var(--mentoria-border);
@@ -237,6 +237,25 @@
     padding: 30px;
     overflow-y: auto;
     flex-grow: 1;
+}
+
+/* Custom Scrollbar */
+.popup-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.popup-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.popup-body::-webkit-scrollbar-thumb {
+    background: #8b4513; /* Tom laranja escuro/terroso */
+    border-radius: 10px;
+}
+
+.popup-body::-webkit-scrollbar-thumb:hover {
+    background: var(--mentoria-primary);
 }
 
 .popup-footer {
@@ -306,7 +325,7 @@
 
 .remove-item {
     position: absolute !important;
-    top: 20px !important;
+    top: 15px !important;
     right: 20px !important;
     background: transparent !important;
     color: var(--mentoria-primary) !important;
@@ -349,20 +368,22 @@
 }
 
 .btn-secondary {
-    background: transparent;
-    color: var(--mentoria-primary);
-    border: 1px solid var(--mentoria-primary);
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
-    font-weight: 600;
-    transition: all 0.2s;
+    background: transparent !important;
+    color: var(--mentoria-primary) !important;
+    border: 1px solid var(--mentoria-primary) !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    width: auto !important;
+    margin-top: 10px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s !important;
+    display: inline-block !important;
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 102, 0, 0.1);
+    background: var(--mentoria-primary) !important;
+    color: white !important;
 }
 
 /* Responsividade */
