@@ -24,14 +24,18 @@ jQuery(document).ready(function($) {
         const nextIndex = $('.timeline-item-form').length;
         const itemHtml = createItemForm('', '', '', nextIndex);
         $itemsList.append(itemHtml);
+        showToast('Novo passo adicionado!');
     });
 
     // Remove Item
     $(document).on('click', '.remove-item', function() {
-        $(this).closest('.timeline-item-form').fadeOut(300, function() {
-            $(this).remove();
-            updateItemNumbers();
-        });
+        if (confirm('Deseja realmente excluir este passo?')) {
+            $(this).closest('.timeline-item-form').fadeOut(300, function() {
+                $(this).remove();
+                updateItemNumbers();
+                showToast('Passo removido.');
+            });
+        }
     });
 
     // Save Data
@@ -59,10 +63,10 @@ jQuery(document).ready(function($) {
             },
             success: function(response) {
                 if (response.success) {
-                    alert('Timeline salva com sucesso!');
-                    location.reload();
+                    showToast('Alterações salvas com sucesso!');
+                    setTimeout(() => location.reload(), 1500);
                 } else {
-                    alert('Erro ao salvar: ' + response.data);
+                    showToast('Erro ao salvar: ' + response.data);
                 }
             },
             complete: function() {
@@ -70,6 +74,12 @@ jQuery(document).ready(function($) {
             }
         });
     });
+
+    function showToast(message) {
+        const $toast = $('#mentoria-toast');
+        $toast.text(message).fadeIn(300);
+        setTimeout(() => $toast.fadeOut(300), 3000);
+    }
 
     function loadTimelineData() {
         $itemsList.html('<p style="text-align:center">Carregando...</p>');
@@ -99,24 +109,24 @@ jQuery(document).ready(function($) {
 
     function updateItemNumbers() {
         $('.timeline-item-form').each(function(index) {
-            $(this).find('.item-number-badge').text('Passo ' + (index + 1));
+            $(this).find('.item-number-badge').text(index + 1);
         });
     }
 
     function createItemForm(link, title, desc, index) {
         return `
             <div class="timeline-item-form">
-                <div class="item-number-badge">Passo ${index + 1}</div>
+                <div class="item-number-badge">${index + 1}</div>
                 <button type="button" class="remove-item">Excluir</button>
-                <div class="form-group">
+                <div class="form-group" style="padding-left: 45px;">
                     <label>Link YouTube</label>
                     <input type="text" name="youtube_link" value="${link}" placeholder="https://www.youtube.com/watch?v=...">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="padding-left: 45px;">
                     <label>Título</label>
                     <input type="text" name="title" value="${title}" placeholder="Título do Passo">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="padding-left: 45px;">
                     <label>Descrição</label>
                     <textarea name="description" rows="3" placeholder="Descrição curta sobre este processo">${desc}</textarea>
                 </div>

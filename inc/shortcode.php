@@ -61,6 +61,7 @@ function plugin_mentoria_shortcode($atts) {
                         <button class="close-popup">&times;</button>
                     </div>
                     <div class="popup-body">
+                        <div id="mentoria-toast" class="mentoria-notification"></div>
                         <div id="timeline-items-list">
                             <!-- Items will be loaded here -->
                         </div>
