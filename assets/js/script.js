@@ -21,7 +21,8 @@ jQuery(document).ready(function($) {
 
     // Add Item
     $('#add-timeline-item').on('click', function() {
-        const itemHtml = createItemForm('', '', '');
+        const nextIndex = $('.timeline-item-form').length;
+        const itemHtml = createItemForm('', '', '', nextIndex);
         $itemsList.append(itemHtml);
     });
 
@@ -29,6 +30,7 @@ jQuery(document).ready(function($) {
     $(document).on('click', '.remove-item', function() {
         $(this).closest('.timeline-item-form').fadeOut(300, function() {
             $(this).remove();
+            updateItemNumbers();
         });
     });
 
@@ -84,20 +86,27 @@ jQuery(document).ready(function($) {
                     $itemsList.empty();
                     const data = response.data;
                     if (data && data.length > 0) {
-                        data.forEach(function(item) {
-                            $itemsList.append(createItemForm(item.youtube_link, item.title, item.description));
+                        data.forEach(function(item, index) {
+                            $itemsList.append(createItemForm(item.youtube_link, item.title, item.description, index));
                         });
                     } else {
-                        $itemsList.append(createItemForm('', '', ''));
+                        $itemsList.append(createItemForm('', '', '', 0));
                     }
                 }
             }
         });
     }
 
-    function createItemForm(link, title, desc) {
+    function updateItemNumbers() {
+        $('.timeline-item-form').each(function(index) {
+            $(this).find('.item-number-badge').text('Passo ' + (index + 1));
+        });
+    }
+
+    function createItemForm(link, title, desc, index) {
         return `
             <div class="timeline-item-form">
+                <div class="item-number-badge">Passo ${index + 1}</div>
                 <button type="button" class="remove-item">Excluir</button>
                 <div class="form-group">
                     <label>Link YouTube</label>
