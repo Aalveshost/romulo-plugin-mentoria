@@ -3,7 +3,7 @@
  * Plugin Name: Romulo - Plugin Pag Mentoria
  * Plugin URI: https://aalves.dev
  * Description: Plugin para exibição de timeline interativa com vídeos do YouTube. Feito por <a href="https://aalves.dev" target="_blank">aalves.dev</a>.
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: aalves.dev
  * Author URI: https://aalves.dev
  * Text Domain: plugin-mentoria
@@ -20,16 +20,17 @@ define('PLUGIN_MENTORIA_URL', plugin_dir_url(__FILE__));
 // Include files
 require_once PLUGIN_MENTORIA_PATH . 'inc/shortcode.php';
 require_once PLUGIN_MENTORIA_PATH . 'inc/admin-ajax.php';
+require_once PLUGIN_MENTORIA_PATH . 'inc/access-control.php';
 
 // Enqueue scripts and styles
 add_action('wp_enqueue_scripts', 'plugin_mentoria_enqueue_assets');
 function plugin_mentoria_enqueue_assets() {
     wp_enqueue_style('plugin-mentoria-style', PLUGIN_MENTORIA_URL . 'assets/css/style.css', array(), '1.0.0');
-    wp_enqueue_script('plugin-mentoria-script', PLUGIN_MENTORIA_URL . 'assets/js/script.js', array('jquery'), '1.0.5', true);
+    wp_enqueue_script('plugin-mentoria-script', PLUGIN_MENTORIA_URL . 'assets/js/script.js', array('jquery'), '1.0.6', true);
 
     wp_localize_script('plugin-mentoria-script', 'pluginMentoria', array(
         'ajax_url' => admin_url('admin-ajax.php'),
         'nonce'    => wp_create_nonce('plugin_mentoria_nonce'),
-        'can_edit' => current_user_can('manage_options')
+        'can_edit' => (current_user_can('manage_options') || get_current_user_id() === 5)
     ));
 }
