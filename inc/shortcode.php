@@ -48,34 +48,39 @@ function plugin_mentoria_shortcode($atts) {
             <?php endif; ?>
         </div>
 
-        <?php if (current_user_can('manage_options')) : ?>
-            <button id="mentoria-edit-trigger" title="Editar Timeline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-            </button>
+        <?php
+    endif;
+    return ob_get_clean();
+}
 
-            <!-- Editor Popup -->
-            <div id="mentoria-editor-popup" class="mentoria-popup-overlay">
-                <div class="mentoria-popup-content">
-                    <div class="popup-header">
-                        <h2>Gerenciar Timeline</h2>
-                        <button class="close-popup">&times;</button>
-                    </div>
-                    <div class="popup-body">
-                        <div id="mentoria-toast" class="mentoria-notification"></div>
-                        <div id="timeline-items-list">
-                            <!-- Items will be loaded here -->
-                        </div>
-                        <button type="button" id="add-timeline-item" class="btn-secondary">+ Adicionar Passo</button>
-                    </div>
-                    <div class="popup-footer">
-                        <button type="button" id="save-timeline-data" class="btn-primary">Salvar Alterações</button>
-                    </div>
-                </div>
+add_action('wp_footer', 'plugin_mentoria_render_editor');
+function plugin_mentoria_render_editor() {
+    if (!current_user_can('manage_options')) return;
+    ?>
+    <button id="mentoria-edit-trigger" title="Editar Timeline">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+    </button>
+
+    <!-- Editor Popup -->
+    <div id="mentoria-editor-popup" class="mentoria-popup-overlay">
+        <div class="mentoria-popup-content">
+            <div class="popup-header">
+                <h2>Gerenciar Timeline</h2>
+                <button class="close-popup">&times;</button>
             </div>
-        <?php endif; ?>
+            <div class="popup-body">
+                <div id="mentoria-toast" class="mentoria-notification"></div>
+                <div id="timeline-items-list">
+                    <!-- Items will be loaded here -->
+                </div>
+                <button type="button" id="add-timeline-item" class="btn-secondary">+ Adicionar Passo</button>
+            </div>
+            <div class="popup-footer">
+                <button type="button" id="save-timeline-data" class="btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
     </div>
     <?php
-    return ob_get_clean();
 }
 
 function plugin_mentoria_get_youtube_id($url) {
