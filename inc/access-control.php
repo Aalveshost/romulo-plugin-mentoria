@@ -85,14 +85,38 @@ function plugin_mentoria_ajax_set_product() {
     }
 }
 
-// 7. Expõe status de mentoria no footer para o JS
+// 7. Expõe status de mentoria no footer e controla visibilidade de elementos UI
 add_action('wp_footer', 'plugin_mentoria_expose_status');
 function plugin_mentoria_expose_status() {
     $mentoria = 0;
     if (is_user_logged_in()) {
         $mentoria = (int) get_user_meta(get_current_user_id(), 'mentoria', true);
     }
-    echo "<script>var mentoriastatus = " . ($mentoria === 1 ? 'true' : 'false') . ";</script>";
+    
+    $js_flag = ($mentoria === 1 ? 'true' : 'false');
+    
+    ?>
+    <script>
+        var mentoriastatus = <?php echo $js_flag; ?>;
+        var comprastatus = mentoriastatus; // Compatibilidade com o seu código anterior
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (mentoriastatus) {
+                var acessarEl = document.getElementById('_acessar');
+                if (acessarEl) acessarEl.style.display = 'flex';
+                
+                var assinarEl = document.getElementById('_assinar');
+                if (assinarEl) assinarEl.style.display = 'none';
+            } else {
+                var assinarEl = document.getElementById('_assinar');
+                if (assinarEl) assinarEl.style.display = 'flex';
+                
+                var acessarEl = document.getElementById('_acessar');
+                if (acessarEl) acessarEl.style.display = 'none';
+            }
+        });
+    </script>
+    <?php
 }
 
 // 8. Exibe campo mentoria no wp-admin
