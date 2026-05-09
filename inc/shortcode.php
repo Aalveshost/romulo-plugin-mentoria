@@ -48,8 +48,7 @@ function plugin_mentoria_shortcode($atts) {
             <?php endif; ?>
         </div>
 
-        <?php
-    endif;
+    <?php
     return ob_get_clean();
 }
 
