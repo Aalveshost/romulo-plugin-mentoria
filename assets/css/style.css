@@ -325,7 +325,7 @@
 
 .remove-item {
     position: absolute !important;
-    top: 15px !important;
+    top: 10px !important;
     right: 20px !important;
     background: transparent !important;
     color: var(--mentoria-primary) !important;
