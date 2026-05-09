@@ -2,9 +2,9 @@
 /**
  * Plugin Name: Romulo - Plugin Pag Mentoria
  * Plugin URI: https://aalves.dev
- * Description: Plugin para exibição de timeline interativa com vídeos do YouTube.
- * Version: 1.0.0
- * Author: Antigravity (Google Deepmind) & Aalves.dev
+ * Description: Plugin para exibição de timeline interativa com vídeos do YouTube. Feito por <a href="https://aalves.dev" target="_blank">aalves.dev</a>.
+ * Version: 1.0.1
+ * Author: aalves.dev
  * Author URI: https://aalves.dev
  * Text Domain: plugin-mentoria
  */
