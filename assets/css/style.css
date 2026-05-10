@@ -205,23 +205,31 @@
     position: fixed !important;
     bottom: 25px !important;
     right: 25px !important;
-    width: 60px !important;
-    height: 60px !important;
+    width: 50px !important;
+    height: 50px !important;
     border-radius: 50% !important;
-    background: var(--mentoria-primary) !important;
-    color: white !important;
-    border: none !important;
+    background: rgba(255, 102, 0, 0.1) !important;
+    color: var(--mentoria-primary) !important;
+    border: 1px solid var(--mentoria-primary) !important;
     cursor: pointer !important;
-    box-shadow: 0 5px 20px rgba(255, 102, 0, 0.4) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     z-index: 99999 !important;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    backdrop-filter: blur(5px) !important;
 }
 
 #mentoria-edit-trigger:hover {
-    transform: scale(1.1) rotate(15deg);
+    background: var(--mentoria-primary) !important;
+    color: white !important;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 102, 0, 0.4) !important;
+}
+
+#mentoria-edit-trigger svg {
+    width: 20px;
+    height: 20px;
 }
 
 /* Popup Styles */
