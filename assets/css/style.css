@@ -209,7 +209,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    z-index: 999999 !important;
+    z-index: 99999 !important;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
@@ -230,7 +230,7 @@
     display: none;
     justify-content: center !important;
     align-items: center !important;
-    z-index: 9999999 !important;
+    z-index: 100000 !important;
     padding: 20px !important;
 }
 
