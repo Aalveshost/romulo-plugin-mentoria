@@ -25,6 +25,8 @@ function plugin_mentoria_save_data() {
                 'youtube_link' => esc_url_raw($item['youtube_link']),
                 'title'        => sanitize_text_field($item['title']),
                 'description'  => sanitize_textarea_field($item['description']),
+                'file_url'     => esc_url_raw($item['file_url']),
+                'file_title'   => sanitize_text_field($item['file_title']),
             );
         }
     }

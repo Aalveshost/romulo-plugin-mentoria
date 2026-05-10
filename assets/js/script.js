@@ -49,7 +49,9 @@ jQuery(document).ready(function($) {
             items.push({
                 youtube_link: $(this).find('input[name="youtube_link"]').val(),
                 title: $(this).find('input[name="title"]').val(),
-                description: $(this).find('textarea[name="description"]').val()
+                description: $(this).find('textarea[name="description"]').val(),
+                file_url: $(this).find('input[name="file_url"]').val(),
+                file_title: $(this).find('input[name="file_title"]').val()
             });
         });
 
@@ -97,10 +99,10 @@ jQuery(document).ready(function($) {
                     const data = response.data;
                     if (data && data.length > 0) {
                         data.forEach(function(item, index) {
-                            $itemsList.append(createItemForm(item.youtube_link, item.title, item.description, index));
+                            $itemsList.append(createItemForm(index, item));
                         });
                     } else {
-                        $itemsList.append(createItemForm('', '', '', 0));
+                        $itemsList.append(createItemForm(0));
                     }
                 }
             }
@@ -109,28 +111,67 @@ jQuery(document).ready(function($) {
 
     function updateItemNumbers() {
         $('.timeline-item-form').each(function(index) {
-            $(this).find('.item-number-badge').text(index + 1);
+            $(this).find('.item-number-circle').text(index + 1);
         });
     }
 
-    function createItemForm(link, title, desc, index) {
-        return `
-            <div class="timeline-item-form">
-                <div class="item-number-badge">${index + 1}</div>
+    function createItemForm(index, data = {}) {
+        const itemHtml = `
+            <div class="timeline-item-form" data-index="${index}">
+                <div class="item-number-circle">${index + 1}</div>
                 <button type="button" class="remove-item">Excluir</button>
-                <div class="form-group" style="padding-left: 45px;">
+                
+                <div class="form-group">
                     <label>Link YouTube</label>
-                    <input type="text" name="youtube_link" value="${link}" placeholder="https://www.youtube.com/watch?v=...">
+                    <input type="text" name="youtube_link" value="${data.youtube_link || ''}" placeholder="https://www.youtube.com/watch?v=...">
                 </div>
-                <div class="form-group" style="padding-left: 45px;">
+                
+                <div class="form-group">
                     <label>Título</label>
-                    <input type="text" name="title" value="${title}" placeholder="Título do Passo">
+                    <input type="text" name="title" value="${data.title || ''}" placeholder="Ex: Passo 1 - Introdução">
                 </div>
-                <div class="form-group" style="padding-left: 45px;">
+                
+                <div class="form-group">
                     <label>Descrição</label>
-                    <textarea name="description" rows="3" placeholder="Descrição curta sobre este processo">${desc}</textarea>
+                    <textarea name="description" placeholder="Descreva brevemente este passo...">${data.description || ''}</textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Título do Botão de Download</label>
+                        <input type="text" name="file_title" value="${data.file_title || ''}" placeholder="Ex: Baixar PDF">
+                    </div>
+                    <div class="form-group half">
+                        <label>Arquivo de Apoio</label>
+                        <div class="file-upload-wrapper">
+                            <input type="text" name="file_url" value="${data.file_url || ''}" placeholder="Link do arquivo...">
+                            <button type="button" class="select-file-btn btn-secondary">Selecionar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
+        return itemHtml;
     }
+
+    // Media Library Logic
+    $(document).on('click', '.select-file-btn', function(e) {
+        e.preventDefault();
+        const btn = $(this);
+        const wrapper = btn.closest('.file-upload-wrapper');
+        const input = wrapper.find('input[name="file_url"]');
+
+        const fileFrame = wp.media({
+            title: 'Selecionar Arquivo de Apoio',
+            button: { text: 'Usar este arquivo' },
+            multiple: false
+        });
+
+        fileFrame.on('select', function() {
+            const attachment = fileFrame.state().get('selection').first().toJSON();
+            input.val(attachment.url);
+        });
+
+        fileFrame.open();
+    });
 });
