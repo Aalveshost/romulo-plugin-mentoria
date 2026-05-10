@@ -35,8 +35,8 @@ function plugin_mentoria_shortcode($atts) {
                                     </div>
                                     <?php if (!empty($item['file_url'])) : ?>
                                         <a href="<?php echo esc_url($item['file_url']); ?>" class="timeline-download-btn" target="_blank">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                                            <?php echo !empty($item['file_title']) ? esc_html($item['file_title']) : 'Baixar Material'; ?>
+                                            <svg aria-hidden="true" class="e-font-icon-svg e-fas-chevron-right" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" width="12" height="12" style="fill: white;"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg>
+                                            <span><?php echo !empty($item['file_title']) ? esc_html($item['file_title']) : 'Baixar Material'; ?></span>
                                         </a>
                                     <?php endif; ?>
                                 <?php else : ?>
