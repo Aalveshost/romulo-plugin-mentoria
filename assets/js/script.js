@@ -162,9 +162,10 @@ jQuery(document).ready(function($) {
         const input = wrapper.find('input[name="file_url"]');
 
         const fileFrame = wp.media({
-            title: 'Selecionar Arquivo de Apoio',
-            button: { text: 'Usar este arquivo' },
-            multiple: false
+            title: 'Selecionar Arquivo PDF',
+            button: { text: 'Usar este PDF' },
+            multiple: false,
+            library: { type: 'application/pdf' }
         });
 
         fileFrame.on('select', function() {
